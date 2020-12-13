@@ -1,2 +1,3 @@
+include ':timer-library'
 include ':app'
 rootProject.name = "sample-jni-flow"
