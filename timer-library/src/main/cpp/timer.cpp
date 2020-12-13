@@ -35,7 +35,11 @@ void timer(int time) {
         auto now = std::chrono::system_clock::now();
         auto now_c = std::chrono::system_clock::to_time_t(now);
         auto current_time = time - (now_c - started_at_c);
-        currentTIme(current_time);
+        if (current_time < 0) {
+            g_running_timer = false;
+        } else {
+            currentTIme(current_time);
+        }
     }
 }
 

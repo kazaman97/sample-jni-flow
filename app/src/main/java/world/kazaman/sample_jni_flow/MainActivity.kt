@@ -3,6 +3,10 @@ package world.kazaman.sample_jni_flow
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import world.kazaman.sample_jni_flow.databinding.ActivityMainBinding
 import world.kazaman.timer_library.TimerLibrary
 
@@ -18,7 +22,23 @@ internal class MainActivity : AppCompatActivity() {
 
         binding.currentTime.text = timerLibrary.helloWorld()
 
-        // TODO Coroutineを導入してUIスレッドを止めないようにする
-        timerLibrary.startTimer(60)
+        binding.startButton.setOnClickListener { view ->
+            CoroutineScope(Dispatchers.Main).launch {
+                view.isEnabled = false
+                start()
+                view.isEnabled = true
+            }
+        }
+
+        binding.stopButton.setOnClickListener {
+            binding.startButton.isEnabled = true
+            timerLibrary.stopTimer()
+        }
+    }
+
+    private suspend fun start() {
+        withContext(Dispatchers.IO) {
+            timerLibrary.startTimer(binding.setTimer.text.toString().toIntOrNull() ?: 0)
+        }
     }
 }
