@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">sample-jni-flow</string>
+
+    <string name="input_time">時間を入力してください</string>
+    <string name="stop">ストップ</string>
+    <string name="reset">リセット</string>
+    <string name="start">スタート</string>
 </resources>
