@@ -11,5 +11,6 @@ class timer {
 
 };
 
+void currentTIme(JNIEnv *env, jobject thiz, int time);
 
 #endif //SAMPLE_JNI_FLOW_TIMER_H

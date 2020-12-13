@@ -17,5 +17,8 @@ internal class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.currentTime.text = timerLibrary.helloWorld()
+
+        // TODO Coroutineを導入してUIスレッドを止めないようにする
+        timerLibrary.startTimer(60)
     }
 }
