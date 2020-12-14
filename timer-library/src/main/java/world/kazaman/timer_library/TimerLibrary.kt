@@ -16,7 +16,7 @@ class TimerLibrary {
     private val _currentTime = MutableStateFlow(0)
     val currentTime = _currentTime
 
-    protected fun onUpdateTime(time: Int) {
+    private fun onUpdateTime(time: Int) {
         _currentTime.value = time
     }
 
