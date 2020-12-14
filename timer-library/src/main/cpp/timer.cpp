@@ -19,7 +19,7 @@ static jobject g_thiz;
 
 void currentTIme(int time) {
     auto clazz = g_env->FindClass("world/kazaman/timer_library/TimerLibrary");
-    auto methodID = g_env->GetMethodID(clazz, "currentTime", "(I)V");
+    auto methodID = g_env->GetMethodID(clazz, "onUpdateTime", "(I)V");
     if (methodID != nullptr) {
         g_env->CallVoidMethod(g_thiz, methodID, time);
     }
@@ -41,14 +41,6 @@ void timer(int time) {
             currentTIme(current_time);
         }
     }
-}
-
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_world_kazaman_timer_1library_TimerLibrary_helloWorld(JNIEnv *env, jobject thiz) {
-    std::string hello = "Hello World";
-
-    return env->NewStringUTF(hello.c_str());
 }
 
 extern "C"
