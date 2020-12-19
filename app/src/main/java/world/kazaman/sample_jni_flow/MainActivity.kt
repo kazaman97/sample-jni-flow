@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
-import world.kazaman.sample_jni_flow.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import world.kazaman.countdown.CountDown
+import world.kazaman.sample_jni_flow.databinding.ActivityMainBinding
 
 @ExperimentalCoroutinesApi
 internal class MainActivity : AppCompatActivity() {
