@@ -1,15 +1,15 @@
-package world.kazaman.timer_library
+package world.kazaman.countdown
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @ExperimentalCoroutinesApi
-class TimerLibrary {
+class CountDown {
     companion object {
-        private val TAG = TimerLibrary::class.java.simpleName
+        private val TAG = CountDown::class.java.simpleName
 
         init {
-            System.loadLibrary("timer")
+            System.loadLibrary("countdown")
         }
     }
 
@@ -20,6 +20,6 @@ class TimerLibrary {
         _currentTime.value = time
     }
 
-    external fun startTimer(time: Int)
-    external fun stopTimer()
+    external fun start(time: Int)
+    external fun stop()
 }

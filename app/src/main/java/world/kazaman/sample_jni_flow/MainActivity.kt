@@ -6,14 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import world.kazaman.sample_jni_flow.databinding.ActivityMainBinding
-import world.kazaman.timer_library.TimerLibrary
+import world.kazaman.countdown.CountDown
 
 @ExperimentalCoroutinesApi
 internal class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val timerLibrary = TimerLibrary()
+    private val countDown = CountDown()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +31,11 @@ internal class MainActivity : AppCompatActivity() {
 
         binding.stopButton.setOnClickListener {
             binding.startButton.isEnabled = true
-            timerLibrary.stopTimer()
+            countDown.stop()
         }
 
         lifecycleScope.launch {
-            timerLibrary.currentTime.collect {
+            countDown.currentTime.collect {
                 binding.currentTime.text = it.toString()
             }
         }
@@ -42,7 +43,7 @@ internal class MainActivity : AppCompatActivity() {
 
     private suspend fun start() {
         withContext(Dispatchers.IO) {
-            timerLibrary.startTimer(binding.setTimer.text.toString().toIntOrNull() ?: 0)
+            countDown.start(binding.setTimer.text.toString().toIntOrNull() ?: 0)
         }
     }
 }

@@ -1,4 +1,4 @@
-package world.kazaman.timer_library
+package world.kazaman.countdown
 
 import org.junit.Test
 

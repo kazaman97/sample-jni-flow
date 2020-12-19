@@ -5,7 +5,7 @@
 #include <jni.h>
 #include <string>
 #include <chrono>
-#include "timer.h"
+#include "countdown.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ static JNIEnv *g_env;
 static jobject g_thiz;
 
 void currentTIme(int time) {
-    auto clazz = g_env->FindClass("world/kazaman/timer_library/TimerLibrary");
+    auto clazz = g_env->FindClass("world/kazaman/countdown/CountDown");
     auto methodID = g_env->GetMethodID(clazz, "onUpdateTime", "(I)V");
     if (methodID != nullptr) {
         g_env->CallVoidMethod(g_thiz, methodID, time);
@@ -26,7 +26,7 @@ void currentTIme(int time) {
     g_env->DeleteLocalRef(clazz);
 }
 
-void timer(int time) {
+void countdown(int time) {
     g_running_timer = true;
     auto started_at = std::chrono::system_clock::now();
     auto started_at_c = std::chrono::system_clock::to_time_t(started_at);
@@ -46,14 +46,14 @@ void timer(int time) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_world_kazaman_timer_1library_TimerLibrary_startTimer(JNIEnv *env, jobject thiz, jint time) {
+Java_world_kazaman_countdown_CountDown_start(JNIEnv *env, jobject thiz, jint time) {
     g_env = env;
     g_thiz = thiz;
-    timer(time);
+    countdown(time);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_world_kazaman_timer_1library_TimerLibrary_stopTimer(JNIEnv *env, jobject thiz) {
+Java_world_kazaman_countdown_CountDown_stop(JNIEnv *env, jobject thiz) {
     g_running_timer = false;
 }
