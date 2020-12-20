@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import world.kazaman.countdown.CountDown
 import world.kazaman.sample_jni_flow.databinding.ActivityMainBinding
@@ -32,11 +31,10 @@ internal class MainActivity : AppCompatActivity() {
         }
 
         binding.stopButton.setOnClickListener {
-            binding.startButton.isEnabled = true
             countDown.stop()
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             countDown.currentTime.collect {
                 binding.currentTime.text = it.toString()
             }

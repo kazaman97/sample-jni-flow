@@ -2,6 +2,7 @@ package world.kazaman.countdown
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @ExperimentalCoroutinesApi
 class CountDown {
@@ -14,7 +15,7 @@ class CountDown {
     }
 
     private val _currentTime = MutableStateFlow(0)
-    val currentTime = _currentTime
+    val currentTime: StateFlow<Int> = _currentTime
 
     private fun onUpdateTime(time: Int) {
         _currentTime.value = time
