@@ -17,8 +17,8 @@ class CountDown {
     private val _currentTime = MutableStateFlow(0)
     val currentTime: StateFlow<Int> = _currentTime
 
-    private fun onUpdateTime(time: Int) {
-        _currentTime.value = time
+    private fun onUpdateCurrentTime(currentTime: Int) {
+        _currentTime.value = currentTime
     }
 
     external fun start(time: Int)

@@ -17,11 +17,11 @@ static bool g_running_timer = false;
 static JNIEnv *g_env;
 static jobject g_thiz;
 
-void currentTIme(int time) {
+void update_current_time(int current_time) {
     auto clazz = g_env->FindClass("world/kazaman/countdown/CountDown");
-    auto methodID = g_env->GetMethodID(clazz, "onUpdateTime", "(I)V");
+    auto methodID = g_env->GetMethodID(clazz, "onUpdateCurrentTime", "(I)V");
     if (methodID != nullptr) {
-        g_env->CallVoidMethod(g_thiz, methodID, time);
+        g_env->CallVoidMethod(g_thiz, methodID, current_time);
     }
     g_env->DeleteLocalRef(clazz);
 }
@@ -39,7 +39,7 @@ void countdown(int time) {
         if (current_time < 0) {
             g_running_timer = false;
         } else {
-            currentTIme(current_time);
+            update_current_time(current_time);
         }
     }
 }

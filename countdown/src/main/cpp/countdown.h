@@ -11,7 +11,7 @@ class countdown {
 
 };
 
-void currentTIme(int time);
+void update_current_time(int current_time);
 
 void countdown(int time);
 
